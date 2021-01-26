@@ -93,8 +93,8 @@ exports.postLogin = (req, res, next) => {
 				req.session.isLoggedIn = true;
 				req.session.user = user;
 				return req.session.save(err => {
-				console.log(err);
-				res.redirect('/');
+					console.log(err);
+					res.redirect('/');
 				});
 			}
 			return res.status(422).render('auth/login', {
@@ -208,7 +208,7 @@ exports.postReset = (req, res, next) => {
 			res.redirect('/');
 			transporter.sendMail({
 				to: req.body.email,
-				from: 'shop@node-complete.com',
+				from: process.env.SENDER_EMAIL,
 				subject: 'Password reset',
 				html: `
 					<p>You requested a password reset</p>
